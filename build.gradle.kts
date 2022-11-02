@@ -2,11 +2,9 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.gradle.spotless.SpotlessPlugin
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
+import org.jlleitschuh.gradle.ktlint.KtlintPlugin
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 import org.jlleitschuh.gradle.ktlint.tasks.GenerateReportsTask
-
-buildscript {
-}
 
 plugins {
     id("com.android.application") version "7.2.0-rc01" apply false
@@ -16,8 +14,15 @@ plugins {
     alias(libs.plugins.ktlint)
 }
 
+buildscript {
+
+    dependencies {
+        classpath(libs.hilt.plugin)
+    }
+}
+
 subprojects {
-    plugins.apply("org.jlleitschuh.gradle.ktlint")
+    apply<KtlintPlugin>()
     apply<SpotlessPlugin>()
 
     configure<SpotlessExtension> {
