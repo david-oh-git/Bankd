@@ -80,7 +80,7 @@ fun BankdTheme(
 
     MaterialTheme(
         colorScheme = colors,
-        typography = oxygenTypography,
+        typography = encodeSansTypography,
         shapes = Shapes,
         content = content
     )
