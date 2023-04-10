@@ -6,20 +6,42 @@ activity-compose-version = "1.3.1"
 junit4-version = "4.13.2"
 lifecycle = "2.3.1"
 junit-ext-version = "1.1.3"
-espresso-version = "3.4.0"
+espresso-version = "3.5.1"
 ktlint = "0.45.2"
 jlleitschuh-ktlint = "10.3.0"
 spotless = "6.7.2"
+truth = "1.1.3"
+junit5 = "5.7.0"
+material3 = "1.0.0-beta01"
+dagger-hilt = "2.44.2"
+nav-version = "2.5.2"
+kotlinxCoroutines = "1.6.4"
+kotlin = "1.6.21"
+androidGradlePlugin = "7.4.0"
 
 [plugins]
 ktlint = { id = "org.jlleitschuh.gradle.ktlint" ,version.ref = "jlleitschuh-ktlint" }
 spotless = { id = "com.diffplug.spotless" ,version.ref = "spotless" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt" }
 
 [libraries]
+nav = { module = "androidx.navigation:navigation-compose", version.ref = "nav-version" }
+hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger-hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger-hilt" }
+hilt-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "dagger-hilt" }
+androidx-hilt-compose = "androidx.hilt:hilt-navigation-compose:1.0.0"
+
+material3 = { module = "androidx.compose.material3:material3" , version.ref = "material3" }
+material3-window = { module = "androidx.compose.material3:material3-window-size-class" , version.ref = "material3" }
+
+timber = "com.jakewharton.timber:timber:5.0.1"
+
 junit4 = { module = "junit:junit" , version.ref = "junit4-version" }
 compose-ui = { module = "androidx.compose.ui:ui" , version.ref = "compose-version" }
 core-ktx = { module = "androidx.core:core-ktx" , version.ref = "core-ktx-version" }
-compose-material = { module = "androidx.compose.material:material", version.ref = "compose-version" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose-version" }
 lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx" , version.ref = "lifecycle" }
 activity-compose = { module = "androidx.activity:activity-compose" , version.ref = "activity-compose-version" }
@@ -28,6 +50,15 @@ espresso-core = { module = "androidx.test.espresso:espresso-core" , version.ref 
 compose-ui-junit = { module = "androidx.compose.ui:ui-test-junit4" , version.ref = "compose-version" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" , version.ref = "compose-version" }
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" , version.ref = "compose-version" }
-truth = "com.google.truth:truth:1.1.3"
+compose-ui-test = { module = "androidx.compose.ui:ui-test" , version.ref = "compose-version" }
+truth = { module = "com.google.truth:truth", version.ref = "truth"}
+junit5-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit5" }
+junit5-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit5" }
+junit5-platform = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit5" }
+
+arch-core = "androidx.arch.core:core-testing:2.1.0"
+espresso-contrib = "androidx.test.espresso:espresso-contrib:3.5.1"
+
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 
 [bundles]

@@ -35,6 +35,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
+        freeCompilerArgs = freeCompilerArgs + listOf(
+            "-opt-in=kotlin.RequiresOptIn",
+            "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+        )
     }
     buildFeatures {
         compose = true
@@ -61,13 +65,15 @@ android {
     }
 
     testOptions {
+        unitTests.isReturnDefaultValues = true
         unitTests.all { test ->
-            test.useJUnitPlatform()
+//            test.useJUnitPlatform()
             test.testLogging {
                 events("passed","skipped", "failed")
             }
         }
     }
+    namespace = "io.osemwota.bankd"
 
 }
 
@@ -91,11 +97,18 @@ dependencies {
     testImplementation(libs.junit4)
     testImplementation(libs.truth)
     testImplementation(libs.junit5.api)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     testRuntimeOnly(libs.junit5.engine)
+
     androidTestImplementation(libs.junit.ext)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.espresso.contrib)
+    androidTestImplementation(libs.arch.core)
     androidTestImplementation(libs.compose.ui.junit)
+    androidTestImplementation(libs.compose.ui.test)
+    androidTestImplementation(libs.truth)
+
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 }

@@ -7,18 +7,13 @@ import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 import org.jlleitschuh.gradle.ktlint.tasks.GenerateReportsTask
 
 plugins {
-    id("com.android.application") version "7.2.0-rc01" apply false
-    id("com.android.library") version "7.2.0-rc01" apply false
-    id("org.jetbrains.kotlin.android") version "1.6.21" apply false
+//    id("com.android.library") version "7.4.0" apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.hilt) apply false
     alias(libs.plugins.spotless)
     alias(libs.plugins.ktlint)
-}
-
-buildscript {
-
-    dependencies {
-        classpath(libs.hilt.plugin)
-    }
 }
 
 subprojects {
