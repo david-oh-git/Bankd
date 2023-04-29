@@ -3,6 +3,7 @@ package io.osemwota.bankd.data
 import com.google.common.truth.Truth.assertThat
 import io.osemwota.bankd.data.remote.LoginSourceImpl
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -20,16 +21,16 @@ class LoginSourceTest {
 
     @Test
     fun loginResponse() = runTest {
-        val response = loginSource.login("username","password")
-        if (response.isSuccessful) {
-            assertThat(response.errorMessage).isNull()
-            assertThat(response.errorCode).isNull()
-            assertThat(response.customerId).isNotNull()
-            assertThat(response.sessionId).isNotNull()
+        val result = loginSource.login("username","password").first()
+        if (result.isSuccess) {
+            val response = result.getOrNull()
+            assertThat(response).isNotNull()
+            assertThat(response?.errorMessage).isNull()
+            assertThat(response?.errorCode).isNull()
+            assertThat(response?.customerId).isNotNull()
+            assertThat(response?.sessionId).isNotNull()
         }else{
-            assertThat(response.customerId).isNull()
-            assertThat(response.errorMessage).isNotNull()
-            assertThat(response.errorCode).isNotNull()
+            assertThat(result.isFailure).isTrue()
         }
     }
 }

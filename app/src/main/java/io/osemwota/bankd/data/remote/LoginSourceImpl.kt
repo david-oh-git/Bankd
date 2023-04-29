@@ -8,6 +8,7 @@ import io.osemwota.bankd.data.ServiceLocator
 import io.osemwota.bankd.data.models.responses.LoginResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -17,7 +18,7 @@ class LoginSourceImpl @Inject constructor(
     private val source: ServiceLocator
 ) : LoginSource {
 
-    override suspend fun login(userName: String, password: String): LoginResponse = withContext(ioDispatcher){
+    override suspend fun login(userName: String, password: String): Flow<Result<LoginResponse>> = withContext(ioDispatcher){
         return@withContext source.getLoginResponse(userName)
     }
 }

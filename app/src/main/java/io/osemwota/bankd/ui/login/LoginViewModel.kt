@@ -4,10 +4,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.osemwota.bankd.LoggingMiddleware
-import io.osemwota.bankd.LoginNetworkMiddleware
 import io.osemwota.bankd.data.repository.LoginRepository
 import io.osemwota.bankd.redux.Store
+import io.osemwota.bankd.redux.middleware.LoggingMiddleware
+import io.osemwota.bankd.redux.middleware.LoginNetworkMiddleware
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

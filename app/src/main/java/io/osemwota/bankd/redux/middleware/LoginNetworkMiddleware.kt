@@ -1,11 +1,16 @@
 package io.osemwota.bankd
 
+import io.osemwota.bankd.data.models.responses.LoginResponse
 import io.osemwota.bankd.data.repository.LoginRepository
 import io.osemwota.bankd.redux.Middleware
 import io.osemwota.bankd.redux.Store
 import io.osemwota.bankd.ui.login.LoginAction
 import io.osemwota.bankd.ui.login.LoginViewState
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withContext
 
 class LoginNetworkMiddleware(
@@ -32,16 +37,12 @@ class LoginNetworkMiddleware(
         currentState: LoginViewState,
         store: Store<LoginViewState, LoginAction>
     ) = withContext(coroutineDispatcher) {
-        val response = loginRepository.login(
+        loginRepository.login(
             currentState.username,
             currentState.password
-        )
-        if (response.isSuccessful && response.customerId != null) {
-            store.dispatch(LoginAction.LoginCompleted(response.customerId))
-        }else {
-            store.dispatch(
-                LoginAction.LoginFailed(Error(response.errorMessage))
-            )
-        }
+        ).onEach { result ->
+            val response: LoginResponse = result.getOrThrow()
+            store.dispatch(LoginAction.LoginCompleted(response.customerId!!))
+        }.catch { LoginAction.LoginFailed(Error(it.message)) }.flowOn(coroutineDispatcher).collect()
     }
 }

@@ -5,6 +5,9 @@ import io.osemwota.bankd.data.models.responses.Customer
 import io.osemwota.bankd.data.models.responses.CustomerResponse
 import io.osemwota.bankd.data.models.responses.LoginResponse
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import java.util.UUID
 import kotlin.random.Random
 
@@ -42,26 +45,24 @@ object ServiceLocator {
         "Ochuba"
     )
 
-    suspend fun getLoginResponse(userName: String): LoginResponse {
+    suspend fun getLoginResponse(userName: String): Flow<Result<LoginResponse>> {
         delay(delays.random())
         return when(Random.nextBoolean()) {
             true -> {
-                LoginResponse(
-                    isSuccessful = true,
-                    errorCode = null,
-                    errorMessage = null,
-                    customerId = UUID.randomUUID(),
-                    sessionId = UUID.randomUUID()
+                flowOf(
+                    Result.success(
+                        LoginResponse(
+                            isSuccessful = true,
+                            errorCode = null,
+                            errorMessage = null,
+                            customerId = UUID.randomUUID(),
+                            sessionId = UUID.randomUUID()
+                        )
+                    )
                 )
             }
             false -> {
-                LoginResponse(
-                    isSuccessful = false,
-                    errorCode = 408,
-                    errorMessage = "Request timed out",
-                    customerId = null,
-                    sessionId = null
-                )
+                flowOf(Result.failure(Exception("Login failed")))
             }
         }
     }

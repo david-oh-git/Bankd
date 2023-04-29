@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Bankd</string>
+    <string name="not_yet_implemented">Not yet implemented …</string>
+    <!--    Login Screen-->
+    <string name="login_screen_login_btn_txt">Login</string>
+    <string name="login_screen_welcome_msg">Welcome back!</string>
+    <string name="login_screen_create_account_btn">Create account</string>
+    <string name="login_screen_bank_logo_desc">Bank logo</string>
+    <string name="login_screen_email_field_label">Email</string>
+    <string name="login_screen_password_field_label">Password</string>
+    <string name="login_screen_forgot_password">Forgot Password?</string>
+    <string name="login_screen_password_field_trailing_hide">Hide</string>
+    <string name="login_screen_password_field_trailing_show">Show</string>
+    <string name="login_screen_enter_username">Enter username</string>
+    <string name="login_screen_enter_password">Enter password</string>
 </resources>
