@@ -25,6 +25,7 @@ class LoginSourceTest {
             assertThat(response.errorMessage).isNull()
             assertThat(response.errorCode).isNull()
             assertThat(response.customerId).isNotNull()
+            assertThat(response.sessionId).isNotNull()
         }else{
             assertThat(response.customerId).isNull()
             assertThat(response.errorMessage).isNotNull()

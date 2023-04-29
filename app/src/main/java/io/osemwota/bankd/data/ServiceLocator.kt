@@ -20,14 +20,32 @@ object ServiceLocator {
     private val currencies: List<String> = listOf(
         "NGN",
         "CED",
-        "EUR"
+        "EUR",
+        "CED"
+    )
+
+    private val firstNames: List<String> = listOf(
+        "Adebola",
+        "Hector",
+        "Chima",
+        "Adesuwa",
+        "Iyore",
+        "Zainab"
+    )
+
+    private val lastNames: List<String> = listOf(
+        "Olukoga",
+        "Petrov",
+        "Agbakpan",
+        "Ogunjimi",
+        "Osakpolo",
+        "Ochuba"
     )
 
     suspend fun getLoginResponse(userName: String): LoginResponse {
-
+        delay(delays.random())
         return when(Random.nextBoolean()) {
             true -> {
-                delay(delays.random())
                 LoginResponse(
                     isSuccessful = true,
                     errorCode = null,
@@ -37,7 +55,6 @@ object ServiceLocator {
                 )
             }
             false -> {
-                delay(delays.random())
                 LoginResponse(
                     isSuccessful = false,
                     errorCode = 408,
@@ -49,16 +66,26 @@ object ServiceLocator {
         }
     }
 
-    private fun getCustomerResponse(customerId: UUID): CustomerResponse {
-        return CustomerResponse(
-            id = customerId,
-            customer = Customer(
+    suspend fun getCustomerResponse(customerId: UUID): CustomerResponse {
+        delay(delays.random())
+        return when(Random.nextBoolean()) {
+            true -> CustomerResponse(
                 id = customerId,
-                firstName = "",
-                lastName = "",
-                accounts = getAccounts(customerId)
+                customer = Customer(
+                    id = customerId,
+                    firstName = firstNames.random(),
+                    lastName = lastNames.random(),
+                    accounts = getAccounts(customerId),
+                ),
+                isSuccessful = true,
             )
-        )
+            false -> CustomerResponse(
+                id = customerId,
+                customer = null,
+                isSuccessful = false,
+            )
+        }
+
     }
 
     private fun getAccounts(customerId: UUID): List<Account> {

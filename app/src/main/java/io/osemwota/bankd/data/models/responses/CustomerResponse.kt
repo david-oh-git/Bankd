@@ -6,7 +6,8 @@ import java.util.UUID
 @Keep
 data class CustomerResponse(
     val id: UUID,
-    val customer: Customer
+    val customer: Customer?,
+    val isSuccessful: Boolean = false,
 )
 
 
@@ -18,6 +19,12 @@ data class Customer(
     val accounts: List<Account>
 )
 
+/**
+ * @param currency Currency code
+ * @param balance Account balance available
+ * @param number Account number
+ * @param customerId Unique id that identifies the customer.
+ */
 @Keep
 data class Account(
     val currency: String,
