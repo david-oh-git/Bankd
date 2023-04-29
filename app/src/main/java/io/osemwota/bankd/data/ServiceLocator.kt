@@ -67,24 +67,22 @@ object ServiceLocator {
         }
     }
 
-    suspend fun getCustomerResponse(customerId: UUID): CustomerResponse {
+    suspend fun getCustomerResponse(customerId: UUID): Flow<Result<CustomerResponse>> {
         delay(delays.random())
         return when(Random.nextBoolean()) {
-            true -> CustomerResponse(
-                id = customerId,
-                customer = Customer(
+            true -> flowOf(
+                Result.success(CustomerResponse(
                     id = customerId,
-                    firstName = firstNames.random(),
-                    lastName = lastNames.random(),
-                    accounts = getAccounts(customerId),
-                ),
-                isSuccessful = true,
+                    customer = Customer(
+                        id = customerId,
+                        firstName = firstNames.random(),
+                        lastName = lastNames.random(),
+                        accounts = getAccounts(customerId),
+                    ),
+                    isSuccessful = true,
+                ))
             )
-            false -> CustomerResponse(
-                id = customerId,
-                customer = null,
-                isSuccessful = false,
-            )
+            false -> flowOf(Result.failure(Exception("Error getting ")))
         }
 
     }
