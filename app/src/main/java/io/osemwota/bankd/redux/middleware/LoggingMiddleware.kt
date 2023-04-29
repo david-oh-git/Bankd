@@ -1,4 +1,4 @@
-package io.osemwota.bankd
+package io.osemwota.bankd.redux.middleware
 
 import io.osemwota.bankd.redux.Action
 import io.osemwota.bankd.redux.Middleware

@@ -1,4 +1,4 @@
-package io.osemwota.bankd
+package io.osemwota.bankd.redux.middleware
 
 import io.osemwota.bankd.data.models.responses.LoginResponse
 import io.osemwota.bankd.data.repository.LoginRepository
